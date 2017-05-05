@@ -1,0 +1,50 @@
+{
+  "name": "thoolika",
+  "version": "0.0.2",
+  "description": "The thoolika-platform",
+  "main": "lib/index.js",
+  "types": "./lib/index.d.ts",
+  "jsnext:main": "src/index.js",
+  "scripts": {
+    "test": "mocha -R spec --recursive",
+    "tsc": "tsc -p ./",
+    "build": "gulp ts-babel",
+    "clean": "bash -c 'for i in $(ls src);do rm -rf ${i/.ts/}*; done'"
+  },
+  "author": "Harish.K <harish2704@gmail.com>",
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "@types/bluebird": "^3.0.37",
+    "@types/express": "^4.0.34",
+    "@types/lodash": "^4.14.52",
+    "@types/node": "^7.0.5",
+    "@types/nunjucks": "0.0.32",
+    "gulp-babel": "^6.1.2",
+    "gulp-debug": "^3.1.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-typescript": "^3.1.4",
+    "merge2": "^1.0.3",
+    "mocha": "^3.1.2",
+    "should": "^11.2.0",
+    "simple-mocha": "^0.0.9",
+    "supertest": "^3.0.0",
+    "typedoc": "^0.5.7",
+    "typescript": "^2.1.5"
+  },
+  "dependencies": {
+    "bluebird": "^3.4.6",
+    "body-parser": "^1.15.2",
+    "compression": "^1.6.2",
+    "debug": "^2.3.2",
+    "fs-extra": "^1.0.0",
+    "gulp-filter": "^5.0.0",
+    "lodash": "^4.16.6",
+    "mime-types": "^2.1.13",
+    "multer": "^1.2.0",
+    "nunjucks-widgets": "https://github.com/harish2704/nunjucks-widgets/archive/5a90bab7095ef374a053981b6f5233557cef2dec.tar.gz",
+    "passport": "^0.3.2",
+    "primus": "^7.0.0",
+    "tconfig": "^0.1.0",
+    "ws": "^1.1.1"
+  }
+}

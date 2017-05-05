@@ -1,0 +1,29 @@
+{
+    "compilerOptions": {
+        "jsx": "react",
+        "allowSyntheticDefaultImports": true,
+        "jsxFactory": "createElement",
+        "outDir": "lib",
+        "moduleResolution": "node",
+        "module": "es6",
+        "target": "es6",
+        "noImplicitAny": false,
+        "baseUrl": ".",
+        "importHelpers": true,
+        "lib":[
+          "DOM",
+          "ES5",
+          "ScriptHost",
+          "ES2015.Symbol",
+          "ES2015.Generator"
+        ],
+        "declaration": true,
+        "sourceMap": true
+    },
+    "include": [
+      "src"
+    ],
+    "exclude": [
+      "node_modules/*"
+    ]
+}
