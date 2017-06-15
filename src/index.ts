@@ -13,7 +13,7 @@ import PluginManager from './PluginManager';
 import EntityManager from './EntityManager';
 import ViewsManager from './ViewsManager';
 import ServiceManager from './ServiceManager';
-import { Service, Transport, ThoolikaApplication, ThoolikaApplicationOptions, ThoolikaModule, Entity, Form  } from './Types';
+import { Service, Transport, ThoolikaApplication, ApplicationOptions, ThoolikaModule, Entity, Form  } from './Types';
 import EntityService from './EntityService';
 import * as Promise from 'bluebird';
 
@@ -58,7 +58,7 @@ function setExtra( app, components ){
 /**
  * Create the main application
  */
-export function createApplication( options:ThoolikaApplicationOptions = {} ): ThoolikaApplication {
+export function createApplication( options:ApplicationOptions = {} ): ThoolikaApplication {
   const app = applyConfig( express() );
 
   if( options.transports ){
@@ -100,7 +100,7 @@ export type ViewsManager =  ViewsManager;
 export type Transport = Transport;
 export type Service = Service;
 export type ThoolikaApplication = ThoolikaApplication;
-export type ThoolikaApplicationOptions = ThoolikaApplicationOptions;
+export type ApplicationOptions = ApplicationOptions;
 export { default as HttpTransport } from './HttpTransport';
 export { default as PrimusTransport } from './PrimusTransport';
 

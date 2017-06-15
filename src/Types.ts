@@ -14,7 +14,7 @@ import EntityManager from './EntityManager';
 import ViewsManager from './ViewsManager';
 import ServiceManager from './ServiceManager';
 
-export interface ThoolikaApplicationOptions{
+export interface ApplicationOptions{
   transports?: Array<Transport>
 
   /**
@@ -24,10 +24,6 @@ export interface ThoolikaApplicationOptions{
 }
 
 
-export interface ThoolikaServiceResponse extends Object{
-  $html?:string;
-  $redirect?:string;
-}
 
 /**
  *  Represents a Thoolika app object.
@@ -68,13 +64,32 @@ export interface ThoolikaApplication extends Application{
 }
 
 
+/**
+ *  Represents a Thoolika module.
+ *  Thoolika module is just a collection of sercices and its underlying Entities.
+ *  A Plugin can have one or more modules.
+ */
 export interface ThoolikaModule{
+
+  /**
+   *  A module can have multiple Entities
+   */
   entities?: Array<Entity>
+
+  /**
+   *  A module can provide multiple services
+   */
   services?: Array<Service>
+
+  /**
+   *  setup function is called before attaching a module to the main application.
+   */
   setup?( app:ThoolikaApplication ):Promise<null>
 }
 
-export interface ThoolikaPluginMain{
+
+
+export interface PluginMain{
   // configure?( app:ThoolikaApplication ): Promise<any>
   setup?( app:ThoolikaApplication ): Promise<any>
 
@@ -82,15 +97,18 @@ export interface ThoolikaPluginMain{
   // postUninstall?( app:ThoolikaApplication ): Promise<any>
 }
 
+
+
+
 /**
  *  A representation of a thoolika Plugin.
  *  A plugin can be stored either in 'plugins' directory of main application or can be a normal npm module.
- *  In either case, in additional to a normal npm module, A ThoolikaPlugin has following additional features
+ *  In either case, in additional to a normal npm module, A Plugin has following additional features
  *  * if a directory named 'views' exists in the root of the plugin, It will be added to [tempalte engine's](Nunjucks) search path
  *  * if a directory named 'static' exists in the root of the plugin, It will be registered in with staticDirManager
  *  * if a directory named 'modules' exists, each files and directory matches '*.module*' patern will be cosidered as a ThoolikaModule. All of these modules will get registered with application instance.
  */
-export interface ThoolikaPlugin {
+export interface Plugin {
 
   /**
    *  Name of the plugin from Package.json
@@ -126,8 +144,36 @@ export interface ThoolikaPlugin {
   /**
    *  main exported values plugin package
    */
-  main: ThoolikaPluginMain
+  main: PluginMain
 }
+
+
+/**
+ *  Represents output data a Service
+ */
+export interface ServiceResult{
+  /**
+   *  will sent as responsebody.data
+   */
+  data?:any,
+
+  /**
+   *  if spefified, server will respond with 3xx redirect
+   */
+  redirect?:string,
+
+  /**
+   *  if specified, will render the given template with `data` field and send the html response
+   */
+  tempate?: string,
+
+  /**
+   *  if specified, send html with proper content-type header
+   */
+  html?:string,
+}
+
+
 
 
 /**
@@ -135,6 +181,39 @@ export interface ThoolikaPlugin {
  *  ServiceParams are provided for extra flexibility for each service actions.
  */
 export interface ServiceParams{
+
+
+  /**
+   *  Query params
+   */
+  query: any,
+
+  /**
+   *  Request body
+   */
+  body: any,
+
+  /**
+   *  Uploaded files
+   */
+  files: any,
+
+  /**
+   *  Loaded session
+   */
+  session: any,
+
+  /**
+   *  A temporary variable where wer store data. Used for communication between middlewares.
+   *  Also used to preload data
+   */
+  scratchpad: any,
+
+  /**
+   *  Final result will get assigend to this object.
+   */
+  result: ServiceResult
+
 
   /**
    *  Request object from express
@@ -147,6 +226,11 @@ export interface ServiceParams{
   res: Response,
 }
 
+
+
+/**
+ *  Represents input query find action
+ */
 export interface ThoolikaFindQuery {
   /**
    *  The Query object.
@@ -160,6 +244,8 @@ export interface ThoolikaFindQuery {
   sort?: any
 }
 
+
+
 /**
  *  Represents ideal response from a find action
  */
@@ -169,6 +255,8 @@ export interface ThoolikaFindResponse{
   skip?: number
   sort?: any
 }
+
+
 
 export interface Service{
 

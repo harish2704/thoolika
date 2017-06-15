@@ -7,7 +7,7 @@
  */
 
 
-import {ThoolikaApplication, ThoolikaServiceResponse, Transport, Service } from './Types';
+import {ThoolikaApplication, Transport, Service } from './Types';
 import * as _ from 'lodash';
 const bodyParser = require('body-parser');
 

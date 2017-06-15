@@ -10,7 +10,7 @@
 import * as Promise from 'bluebird';
 import { resolve, dirname, join as _p } from 'path';
 import { readdirSync, existsSync } from 'fs';
-import { ThoolikaApplication, ThoolikaPlugin } from './Types';
+import { ThoolikaApplication, Plugin } from './Types';
 const warn = require('debug')('Thoolika::PluginManager:warn');
 const debug = require('debug')('Thoolika::PluginManager:debug');
 const filetypeRegex = /\.module(\.js)?$/;
@@ -20,7 +20,7 @@ const filetypeRegex = /\.module(\.js)?$/;
 export default class PluginManager{
 
   plugins: {
-    [name:string]: ThoolikaPlugin
+    [name:string]: Plugin
   };
 
   pluginDir:string;
